@@ -2,8 +2,16 @@ const container = document.getElementById('card-container');
 const selected = document.getElementById('selected-cards');
 const cardCount = 23;
 
-const selectedIds = new Set();
+function preloadImages(count) {
+  for (let i = 1; i <= count; i++) {
+    const img = new Image();
+    img.src = `img/${i}.jpg`;
+  }
+}
+preloadImages(cardCount);
 
+
+const selectedIds = new Set();
 const titles = {
   "1": {"title": "THE FOOL 愚者", "url": "https://ameblo.jp/misakinoe/entry-12337484290.html", 
   "desc": "愚者とは信頼し続ける人です。愚者とはすべての経験に対して信頼し続ける人です。あなたが彼を騙しても、彼はあなたを信頼します。再び彼を騙しても、彼はあなたを信頼します。また再び彼を騙しても、彼はあなたを信頼します。愚者は学習しないと言うでしょう。彼の信頼は絶大です。誰もそれを邪魔することはできません。禅において、道教において愚者であること。知識の壁を作らないでください。どんな経験も受け入れて、続けてください。心をクリアにしてください。過去に対して無感覚になり、いま生まれたかのように、生きましょう。最初はとても難しいでしょう。世間があなたを利用し始めます。ぜひそうさせてください。彼らは哀れな人たちです。たとえ騙されて、騙されて、奪われたとしても、誰もあなた自身を奪うことはできません。あなたが堕落しない限り、その機会が自分の内側を統合します。魂はより結晶化し明晰なものになるでしょう。ライダー版タロットはこちら"},
