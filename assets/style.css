@@ -35,8 +35,7 @@ h1 {
   cursor: pointer;
   border: 2px solid transparent;
   border-radius: 6px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  background: #ddd;
+  background: #333;
   overflow: hidden;
 }
 .card:first-child {
