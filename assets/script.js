@@ -127,63 +127,60 @@ document.getElementById('reset-button').addEventListener('click', () => {
 });
 
 //スマホの挙動。
-if (window.matchMedia("(pointer: coarse)").matches) {  
+if (window.matchMedia("(pointer: coarse)").matches) {
   const cards = document.querySelectorAll('.card');
   let currentHover = null;
 
-  cards.forEach(card => {
-    card.addEventListener('touchstart', (e) => {
-      e.preventDefault(); // スクロールを防ぐ
-      const touch = e.touches[0];
-      const target = document.elementFromPoint(touch.clientX, touch.clientY);
-      const touchedCard = target && target.closest('.card');
-    
-      if (currentHover && currentHover !== touchedCard) {
-        currentHover.classList.remove('hovered');
-      }
-    
-      if (touchedCard && !touchedCard.classList.contains('hovered')) {
-        touchedCard.classList.add('hovered');
-      }
-    
-      currentHover = touchedCard;
-    });
-    
-    card.addEventListener('touchmove', (e) => {
-      const touch = e.touches[0];
-      const target = document.elementFromPoint(touch.clientX, touch.clientY);
-      const hoveredCard = target && target.closest('.card');
-    
-      if (hoveredCard !== currentHover) {
-        // 前のhoverを解除
-        if (currentHover) {
-          currentHover.classList.remove('hovered');
-        }
-    
-        // 新しくhoverされたカードがあれば設定
-        if (hoveredCard) {
-          hoveredCard.classList.add('hovered');
-          currentHover = hoveredCard;
-        } else {
-          // どこにもhoverしてない状態
-          currentHover = null;
-        }
-      }
-    });
+  // タッチ開始時
+  document.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    const card = target && target.closest('.card');
 
-    card.addEventListener('touchend', () => {
+    if (currentHover && currentHover !== card) {
+      currentHover.classList.remove('hovered');
+      currentHover = null;
+    }
+
+    if (card) {
+      card.classList.add('hovered');
+      currentHover = card;
+    }
+  }, { passive: false });
+
+  // タッチ移動時
+  document.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    const card = target && target.closest('.card');
+
+    if (card !== currentHover) {
       if (currentHover) {
         currentHover.classList.remove('hovered');
-        currentHover.click();
+      }
+      if (card) {
+        card.classList.add('hovered');
+        currentHover = card;
+      } else {
         currentHover = null;
       }
-    });
+    }
+  }, { passive: false });
 
-    card.addEventListener('touchcancel', () => {
-      if (currentHover) {
-        currentHover.classList.remove('hovered');
-        currentHover = null;
-      }
-    });
+  // タッチ終了時：クリック処理してhover解除
+  document.addEventListener('touchend', () => {
+    if (currentHover) {
+      currentHover.click();  // click をシミュレート
+      currentHover.classList.remove('hovered');
+      currentHover = null;
+    }
+  });
+
+  // タッチキャンセル時も解除
+  document.addEventListener('touchcancel', () => {
+    if (currentHover) {
+      currentHover.classList.remove('hovered');
+      currentHover = null;
+    }
   });
 }
