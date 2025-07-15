@@ -148,6 +148,7 @@ if (window.matchMedia("(pointer: coarse)").matches) {
 
     // スワイプ中に他のカードへhoverを移動する
     card.addEventListener('touchmove', (e) => {
+      e.preventDefault(); 
       const touch = e.touches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
       if (target && target.closest('.card')) {
