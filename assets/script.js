@@ -154,23 +154,22 @@ if (window.matchMedia("(pointer: coarse)").matches) {
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
       const hoveredCard = target && target.closest('.card');
     
-      // 1. もし指がカードの外に出たら hovered を解除
-      if (!hoveredCard && currentHover) {
-        currentHover.classList.remove('hovered');
-        currentHover = null;
-        return;
-      }
-    
-      // 2. 指が別のカードに移動したら切り替え
       if (hoveredCard !== currentHover) {
+        // 前のhoverを解除
         if (currentHover) {
           currentHover.classList.remove('hovered');
         }
-        hoveredCard.classList.add('hovered');
-        currentHover = hoveredCard;
+    
+        // 新しくhoverされたカードがあれば設定
+        if (hoveredCard) {
+          hoveredCard.classList.add('hovered');
+          currentHover = hoveredCard;
+        } else {
+          // どこにもhoverしてない状態
+          currentHover = null;
+        }
       }
     });
-
 
     card.addEventListener('touchend', () => {
       if (currentHover) {
