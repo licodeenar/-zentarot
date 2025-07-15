@@ -133,10 +133,20 @@ if (window.matchMedia("(pointer: coarse)").matches) {
   let currentHover = null;
 
   cards.forEach(card => {
+    // touchstartで最初に触れたカードを一旦hoveredにする
+    card.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (target && target.closest('.card')) {
+        currentHover = target.closest('.card');
+        currentHover.classList.add('hovered');
+      }
+    });
+
+    // スワイプ中に他のカードへhoverを移動する
     card.addEventListener('touchmove', (e) => {
       const touch = e.touches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
-
       if (target && target.closest('.card')) {
         const hoveredCard = target.closest('.card');
 
@@ -149,6 +159,7 @@ if (window.matchMedia("(pointer: coarse)").matches) {
       }
     });
 
+    // 指を離したらhovered解除とクリック実行
     card.addEventListener('touchend', () => {
       if (currentHover) {
         currentHover.classList.remove('hovered');
@@ -157,6 +168,7 @@ if (window.matchMedia("(pointer: coarse)").matches) {
       }
     });
 
+    // キャンセル時もhovered解除
     card.addEventListener('touchcancel', () => {
       if (currentHover) {
         currentHover.classList.remove('hovered');
