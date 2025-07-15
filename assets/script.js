@@ -126,3 +126,16 @@ document.getElementById('reset-button').addEventListener('click', () => {
   location.reload();
 });
 
+// スマホ向けタップ時 hover風アニメーション
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('touchstart', () => {
+    if (card.classList.contains('hovered')) return;
+
+    card.classList.add('hovered');
+
+    setTimeout(() => {
+      card.classList.remove('hovered');
+    }, 1000); // 1秒で消える（必要に応じて調整）
+  });
+});
+
