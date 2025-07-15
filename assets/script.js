@@ -100,6 +100,9 @@ for (let i = 0; i < cardCount; i++) {
     selectedIds.add(id);
     card.classList.add('selected');
 
+    // 選択直後にhovered解除
+    card.classList.remove('hovered');
+
     // カード画像表示
     const frontImg = document.createElement('img');
     frontImg.src = `img/${id}.jpg`;
@@ -126,7 +129,7 @@ document.getElementById('reset-button').addEventListener('click', () => {
   location.reload();
 });
 
-/*
+
 //スマホの挙動。
 if (window.matchMedia("(pointer: coarse)").matches) {
   const cards = document.querySelectorAll('.card');
@@ -185,4 +188,3 @@ if (window.matchMedia("(pointer: coarse)").matches) {
     }
   });
 }
-*/
