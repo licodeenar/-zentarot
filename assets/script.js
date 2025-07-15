@@ -140,33 +140,30 @@ if (window.matchMedia("(pointer: coarse)").matches) {
       currentHover = card;
       currentHover.classList.add('hovered');
     });
-
+    
     card.addEventListener('touchmove', (e) => {
       const touch = e.touches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
-      const hoveredCard = target && target.closest('.card');
-
-      if (currentHover && currentHover !== hoveredCard) {
-        currentHover.classList.remove('hovered');
-        currentHover = null;
-      }
-
-      if (hoveredCard && !hoveredCard.classList.contains('hovered')) {
-        currentHover = hoveredCard;
-        currentHover.classList.add('hovered');
+      const newHover = target && target.closest('.card');
+    
+      if (newHover !== currentHover) {
+        if (currentHover) {
+          currentHover.classList.remove('hovered');
+        }
+    
+        if (newHover) {
+          newHover.classList.add('hovered');
+        }
+    
+        currentHover = newHover;
       }
     });
 
     card.addEventListener('touchend', () => {
       if (currentHover) {
-        const clickedCard = currentHover;
-        clickedCard.click();
-    
-        // イベントループの次のタイミングで hover解除＆null
-        setTimeout(() => {
-          clickedCard.classList.remove('hovered');
-          currentHover = null;
-        }, 0);
+        currentHover.classList.remove('hovered');
+        currentHover.click();
+        currentHover = null;
       }
     });
 
