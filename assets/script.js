@@ -159,12 +159,14 @@ if (window.matchMedia("(pointer: coarse)").matches) {
 
     card.addEventListener('touchend', () => {
       if (currentHover) {
-        // 強制リフローを入れることでレイアウト崩れ防止
-        void currentHover.offsetWidth;
+        const clickedCard = currentHover;
+        clickedCard.click();
     
-        currentHover.classList.remove('hovered');
-        currentHover.click();
-        currentHover = null;
+        // イベントループの次のタイミングで hover解除＆null
+        setTimeout(() => {
+          clickedCard.classList.remove('hovered');
+          currentHover = null;
+        }, 0);
       }
     });
 
