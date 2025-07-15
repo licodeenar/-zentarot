@@ -42,14 +42,22 @@ h1 {
 .card:first-child {
   margin-left: 0;
 }
-.card:hover,
 .card.hovered {
   margin-left: -35px !important;
   transform: translateY(5px);
   z-index: 10;
 }
-.card:first-child:hover {
-  margin-left: 0 !important; 
+.card:first-child.hovered {
+  margin-left: 0 !important;
+}
+
+/* タッチデバイスでの:hover無効化 */
+@media (pointer: coarse) {
+  .card:hover {
+    margin-left: inherit;
+    transform: none;
+    z-index: auto;
+  }
 }
 
 /* 選択済みカード */
@@ -144,7 +152,6 @@ h1 {
     margin-left: -40px;
   }
 
-  .card:hover,
   .card.hovered {
     margin-left: -35px !important;
     transform: translateY(5px);
@@ -155,6 +162,10 @@ h1 {
     margin-left: 0;
   }
 
+  .card:first-child.hovered {
+    margin-left: 0 !important;
+  }
+
   #selected-cards {
     flex-wrap: nowrap;
     justify-content: center;
@@ -162,9 +173,8 @@ h1 {
   }
 
   #selected-cards img {
-    width: calc((100vw - 80px) / 4); 
+    width: calc((100vw - 80px) / 4);
     height: auto;
-    
   }
 
   #description p {
@@ -182,4 +192,3 @@ h1 {
     width: 100%;
   }
 }
-
