@@ -135,6 +135,9 @@ if (window.matchMedia("(pointer: coarse)").matches) {
   cards.forEach(card => {
     // touchstartで最初に触れたカードを一旦hoveredにする
     card.addEventListener('touchstart', (e) => {
+      if (currentHover) {
+        currentHover.classList.remove('hovered');
+      }
       const touch = e.touches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
       if (target && target.closest('.card')) {
