@@ -46,6 +46,9 @@ h1 {
   transform: translateY(0px);
   z-index: 10;
 }
+.card:first-child:hover {
+  margin-left: 0 !important; 
+}
 
 /* 選択済みカード */
 .card.selected {
