@@ -126,7 +126,7 @@ document.getElementById('reset-button').addEventListener('click', () => {
   location.reload();
 });
 
-//スマホの挙動
+//スマホの挙動。
 if (window.matchMedia("(pointer: coarse)").matches) {  
   const cards = document.querySelectorAll('.card');
   let currentHover = null;
