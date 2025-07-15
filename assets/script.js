@@ -148,28 +148,24 @@ if (window.matchMedia("(pointer: coarse)").matches) {
 
     // スワイプ中に他のカードへhoverを移動する
     card.addEventListener('touchmove', (e) => {
-      e.preventDefault(); 
+      e.preventDefault();
       const touch = e.touches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
-      if (target && target.closest('.card')) {
-        const hoveredCard = target.closest('.card');
     
-        if (currentHover && currentHover !== hoveredCard) {
-          currentHover.classList.remove('hovered');
-        }
+      if (!target) return;
     
-        if (!hoveredCard.classList.contains('hovered')) {
-          hoveredCard.classList.add('hovered');
-        }
-        currentHover = hoveredCard;
-      } else {
-        // 指がカード外にある場合はhovered解除
+      const hoveredCard = target.closest('.card');
+      if (!hoveredCard) return;
+    
+      if (hoveredCard !== currentHover) {
         if (currentHover) {
           currentHover.classList.remove('hovered');
-          currentHover = null;
         }
+        hoveredCard.classList.add('hovered');
+        currentHover = hoveredCard;
       }
     });
+
 
     // 指を離したらhovered解除とクリック実行
     card.addEventListener('touchend', () => {
