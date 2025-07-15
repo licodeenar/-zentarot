@@ -183,7 +183,7 @@ h1 {
   }
 }
 
-/* タッチデバイスでは :hover を無効化 */
+/*
 @media (hover: none) {
   .card:hover {
     margin-left: 0 !important;
@@ -191,4 +191,4 @@ h1 {
     z-index: auto !important;
   }
 }
-
+*/
