@@ -183,7 +183,6 @@ h1 {
   }
 }
 
-/*
 @media (hover: none) {
   .card:hover {
     margin-left: 0 !important;
@@ -191,4 +190,3 @@ h1 {
     z-index: auto !important;
   }
 }
-*/
