@@ -21,7 +21,7 @@ h1 {
   justify-content: center;
   flex-wrap: nowrap;
   position: relative;
-  overflow-x: auto;
+  overflow-x: visible;
 }
 
 /* カード */
@@ -43,7 +43,7 @@ h1 {
 }
 .card:hover {
   margin-left: -35px !important;
-  transform: translateY(0px);
+  transform: translateY(-10px);
   z-index: 10;
 }
 .card:first-child:hover {
@@ -132,7 +132,7 @@ h1 {
 @media screen and (max-width: 600px) {
   #card-container {
     flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow-x: visible;
     margin: 0 auto 20px auto;
   }
 
@@ -144,7 +144,7 @@ h1 {
 
   .card:hover {
     margin-left: -35px !important;
-    transform: translateY(0px);
+    transform: translateY(-10px);
     z-index: 10;
   }
 
