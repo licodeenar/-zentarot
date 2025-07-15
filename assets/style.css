@@ -182,3 +182,13 @@ h1 {
     width: 100%;
   }
 }
+
+/* タッチデバイスでは :hover を無効化 */
+@media (hover: none) {
+  .card:hover {
+    margin-left: 0 !important;
+    transform: none !important;
+    z-index: auto !important;
+  }
+}
+
