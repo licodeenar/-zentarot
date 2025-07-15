@@ -120,6 +120,7 @@ for (let i = 0; i < cardCount; i++) {
     p.innerHTML = `<b>【${order}枚目】${titleText}</b><br>${descText}`;
     descDiv.appendChild(p);
 
+    //hoveredを明示的に解除
     card.classList.remove('hovered');
   });
 }
