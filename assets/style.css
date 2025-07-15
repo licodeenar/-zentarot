@@ -183,9 +183,3 @@ h1 {
   }
 }
 
-@media (pointer: coarse) {
-  .card:hover {
-    background: none;
-    transform: none;
-  }
-}
