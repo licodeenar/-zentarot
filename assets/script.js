@@ -119,9 +119,6 @@ for (let i = 0; i < cardCount; i++) {
     const p = document.createElement('p');
     p.innerHTML = `<b>【${order}枚目】${titleText}</b><br>${descText}`;
     descDiv.appendChild(p);
-
-    //hoveredを明示的に解除
-    card.classList.remove('hovered');
   });
 }
 
