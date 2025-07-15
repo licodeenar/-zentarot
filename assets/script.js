@@ -149,13 +149,21 @@ if (window.matchMedia("(pointer: coarse)").matches) {
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
       if (target && target.closest('.card')) {
         const hoveredCard = target.closest('.card');
-
+    
         if (currentHover && currentHover !== hoveredCard) {
           currentHover.classList.remove('hovered');
         }
-
-        hoveredCard.classList.add('hovered');
+    
+        if (!hoveredCard.classList.contains('hovered')) {
+          hoveredCard.classList.add('hovered');
+        }
         currentHover = hoveredCard;
+      } else {
+        // 指がカード外にある場合はhovered解除
+        if (currentHover) {
+          currentHover.classList.remove('hovered');
+          currentHover = null;
+        }
       }
     });
 
