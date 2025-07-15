@@ -126,16 +126,42 @@ document.getElementById('reset-button').addEventListener('click', () => {
   location.reload();
 });
 
-// スマホ向けタップ時 hover風アニメーション
-document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('touchstart', () => {
-    if (card.classList.contains('hovered')) return;
 
-    card.classList.add('hovered');
+if (window.matchMedia("(pointer: coarse)").matches) {
+  // タッチデバイス（スマホ・タブレット）のときだけ実行
+  const cards = document.querySelectorAll('.card');
+  let currentHover = null;
 
-    setTimeout(() => {
-      card.classList.remove('hovered');
-    }, 1000); // 1秒で消える（必要に応じて調整）
+  cards.forEach(card => {
+    card.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (target && target.closest('.card')) {
+        const hoveredCard = target.closest('.card');
+
+        if (currentHover && currentHover !== hoveredCard) {
+          currentHover.classList.remove('hovered');
+        }
+
+        hoveredCard.classList.add('hovered');
+        currentHover = hoveredCard;
+      }
+    });
+
+    card.addEventListener('touchend', () => {
+      if (currentHover) {
+        currentHover.classList.remove('hovered');
+        currentHover.click();
+        currentHover = null;
+      }
+    });
+
+    card.addEventListener('touchcancel', () => {
+      if (currentHover) {
+        currentHover.classList.remove('hovered');
+        currentHover = null;
+      }
+    });
   });
-});
-
+}
