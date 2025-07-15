@@ -159,6 +159,9 @@ if (window.matchMedia("(pointer: coarse)").matches) {
 
     card.addEventListener('touchend', () => {
       if (currentHover) {
+        // 強制リフローを入れることでレイアウト崩れ防止
+        void currentHover.offsetWidth;
+    
         currentHover.classList.remove('hovered');
         currentHover.click();
         currentHover = null;
